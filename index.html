@@ -4,7 +4,7 @@
     <link rel="manifest" href="manifest.json">
     <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.9/pwacompat.min.js" integrity="sha384-VcI6S+HIsE80FVM1jgbd6WDFhzKYA0PecD/LcIyMQpT4fMJdijBh0I7Iblaacawc" crossorigin="anonymous"></script>
     <style href="style.css" type="text/css"></style>
-
+    <script src="dist/clipboard.min.js"></script>
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,6 +18,11 @@
         window.onload = () => inicializar();
 
         function inicializar() {
+
+            const copy = new ClipboardJS(".btnCopy");
+            const paste = new ClipboardJS(".btnPaste");
+
+
 
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/PokemonOffsetToPointer/sw.js');
@@ -41,49 +46,7 @@
             }
         }
 
-        function CopiarOffset() {
-            CopiarToClipBoard("inpOffset");
-        }
 
-        function CopiarPointer() {
-            CopiarToClipBoard("inpPointer");
-        }
-
-        function PegarOffset() {
-            PegarToClipBoard("inpOffset");
-            GenerarPointer();
-        }
-
-        function PegarPointer() {
-            PegarToClipBoard("inpPointer");
-            GenerarOffset();
-        }
-
-        function CopiarToClipBoard(inPutId) {
-            /* Get the text field */
-            var copyText = document.getElementById(inPutId);
-
-            /* Select the text field */
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-            /* Copy the text inside the text field */
-            document.execCommand("copy");
-
-        }
-
-        function PegarToClipBoard(inPutId) {
-            // Get pasted data via clipboard API
-            var editor = document.getElementById(inPutId);
-
-            editor.focus();
-
-            editor.select();
-
-
-
-            document.execCommand('Paste');
-        }
 
 
 
@@ -101,17 +64,17 @@
             <tr>
                 <td>Offset</td>
                 <td><input id="inpOffset" placeholder="Offset"></td>
-                <td><input type="button" onclick="PegarOffset()" value="Pegar"></input>
+                <td><button class="btnPaste" data-clipboard-action="paste" data-clipboard-target="#inpOffset">Pegar</button>
                 </td>
-                <td><input type="button" onclick="CopiarOffset()" value="Copiar"></input>
+                <td><button class="btnCopy" data-clipboard-action="copy" data-clipboard-target="#inpOffset">Copiar</button>
                 </td>
             </tr>
             <tr>
                 <td>Pointer</td>
                 <td><input id="inpPointer" placeholder="Pointer"></td>
-                <td><input type="button" onclick="PegarPointer()" value="Pegar"></input>
+                <td><button class="btnPaste" data-clipboard-action="paste" data-clipboard-target="#inpPointer">Pegar</button>
                 </td>
-                <td><input type="button" onclick="CopiarPointer()" value="Copiar"></input>
+                <td><button class="btnCopy" data-clipboard-action="copy" data-clipboard-target="#inpPointer">Copiar</button>
                 </td>
             </tr>
 
