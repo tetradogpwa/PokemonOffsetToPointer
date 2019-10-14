@@ -16,7 +16,27 @@
     <script language="javascript">
         window.onload = () => inicializar();
 
+
         function inicializar() {
+
+            document.getElementById("btnCopiarOffset").addEventListener("copy", (e) => {
+                CopiarToClipBoard(e, "inpOffset");
+
+            });
+            document.getElementById("btnCopiarPointer").addEventListener("copy", (e) => {
+                CopiarToClipBoard(e, "inpPointer");
+
+            });
+            document.getElementById("btnPegarOffset").addEventListener("paste", (e) => {
+                document.getElementById("inpOffset").value = PegarToClipBoard(e);
+                GenerarPointer();
+
+            });
+            document.getElementById("btnPegarPointer").addEventListener("paste", (e) => {
+                document.getElementById("inpPointer").value = PegarToClipBoard(e);
+                GenerarOffset();
+
+            });
 
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/PokemonOffsetToPointer/sw.js');
@@ -40,34 +60,25 @@
             }
         }
 
-        function CopiarOffset() {
-            CopiarToClipBoard("inpOffset");
-        }
-
-        function CopiarPointer() {
-            CopiarToClipBoard("inpPointer");
-        }
 
         function PegarOffset() {
-            document.getElementById("inpOffset").value = PegarToClipBoard();
-            GenerarPointer();
+
         }
 
         function PegarPointer() {
-            document.getElementById("inpPointer").value = PegarToClipBoard();
-            GenerarOffset();
+
         }
 
-        function CopiarToClipBoard(inPutId) {
+        function CopiarToClipBoard(e, inPutId) {
             /* Get the text field */
             var copyText = document.getElementById(inPutId);
 
-            window.clipboardData.setData("text/plain", copyText.value);
+            e.clipboardData.setData("text/plain", copyText.value);
         }
 
-        function PegarToClipBoard() {
+        function PegarToClipBoard(e) {
             // Get pasted data via clipboard API
-            return window.clipboardData.getData('Text');
+            return e.clipboardData.getData('Text');
         }
 
 
@@ -91,17 +102,17 @@
             <tr>
                 <td>Offset</td>
                 <td><input id="inpOffset" placeholder="Offset"></td>
-                <td><input type="button" onclick="PegarOffset()" value="Pegar"></input>
+                <td><input id="btnPegarOffset" type="button" value="Pegar"></input>
                 </td>
-                <td><input type="button" onclick="CopiarOffset()" value="Copiar"></input>
+                <td><input id="btnCopiarOffset" type="button" value="Copiar"></input>
                 </td>
             </tr>
             <tr>
                 <td>Pointer</td>
                 <td><input id="inpPointer" placeholder="Pointer"></td>
-                <td><input type="button" onclick="PegarPointer()" value="Pegar"></input>
+                <td><input id="btnPegarPointer" type="button" value="Pegar"></input>
                 </td>
-                <td><input type="button" onclick="CopiarPointer()" value="Copiar"></input>
+                <td><input id="btnCopiarPointer" type="button" value="Copiar"></input>
                 </td>
             </tr>
 
