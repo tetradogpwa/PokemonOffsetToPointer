@@ -27,7 +27,7 @@ function CalculaOffset(pointer) {
         if (PointerEsValido(pointer)) {
             pointer = ArreglaPointer(pointer);
             // XX YY ZZ 08 o 09 Pointer
-            acabaEn8 = String(pointer).substring(String(pointer).length() - 1, String(pointer).length()).equals("8");
+            acabaEn8 = String(pointer).substring(String(pointer).length - 1, String(pointer).length).equals("8");
             //ZZYYXX offset y si acaba en 09 se le suma 0x FF FF FF al offset
             offset = String(pointer).substring(4, 6) + String(pointer).substring(2, 4) + String(pointer).substring(0, 2);
             if (!acabaEn8) {
@@ -99,13 +99,13 @@ function PointerEsValido(ptr) {
     var esMasPequeño;
     var lastChar;
 
-    if (String(ptr).match("-?[0-9a-fA-F]+") && String(ptr).length() <= MAXLENGTH) {
+    if (String(ptr).match("-?[0-9a-fA-F]+") && String(ptr).length <= MAXLENGTH) {
 
-        esMasPequeño = String(ptr).length() < MAXLENGTH - 1;
+        esMasPequeño = String(ptr).length < MAXLENGTH - 1;
         valido = esMasPequeño;
 
         if (!esMasPequeño) {
-            lastChar = String(ptr).substring(String(ptr).length() - 1);
+            lastChar = String(ptr).substring(String(ptr).length - 1);
             valido = lastChar.equals(End8) || lastChar.equals(End9);
         }
     }
@@ -114,8 +114,8 @@ function PointerEsValido(ptr) {
 
 function ArreglaPointer(pointer) {
     var poner08 = true;
-    if (String(pointer).length() > MAXLENGTH - 2) {
-        poner08 = String(pointer).substring(String(pointer).length() - 1, String(pointer).length()).equals("8");
+    if (String(pointer).length > MAXLENGTH - 2) {
+        poner08 = String(pointer).substring(String(pointer).length - 1, String(pointer).length).equals("8");
         pointer = String(pointer).substring(0, MAXLENGTH - 2);
     } else {
         pointer = PadLeft(pointer, MAXLENGTH - 2, '0');
@@ -132,7 +132,7 @@ function ArreglaPointer(pointer) {
 function PadLeft(string, maxLenght, caracter) {
     var str = "";
     var i;
-    for (i = String(string).length(); i < maxLenght; i++) {
+    for (i = String(string).length; i < maxLenght; i++) {
         str += caracter;
     }
     str += string;
