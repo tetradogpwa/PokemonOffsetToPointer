@@ -53,7 +53,7 @@
             PegarToClipBoard().then(paste => {
                 document.getElementById("inpOffset").value = paste;
                 GenerarPointer();
-            });
+            }).catch(() => alert("se ha bloqueado el botón pegar, desbloquealo para poder usarlo"));
         }
 
         function PegarPointer() {
@@ -61,7 +61,7 @@
             PegarToClipBoard().then(paste => {
                 document.getElementById("inpPointer").value = paste;
                 GenerarOffset();
-            });
+            }).catch(() => alert("se ha bloqueado el botón pegar, desbloquealo para poder usarlo"));
         }
 
         function CopiarToClipBoard(inPutId) {
