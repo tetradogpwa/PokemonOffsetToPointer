@@ -27,7 +27,7 @@ function CalculaOffset(pointer) {
         if (PointerEsValido(pointer)) {
             pointer = ArreglaPointer(pointer);
             // XX YY ZZ 08 o 09 Pointer
-            acabaEn8 = String(pointer).substring(String(pointer).length - 1, String(pointer).length).equals("8");
+            acabaEn8 = String(pointer).substring(String(pointer).length - 1, String(pointer).length) == "8";
             //ZZYYXX offset y si acaba en 09 se le suma 0x FF FF FF al offset
             offset = String(pointer).substring(4, 6) + String(pointer).substring(2, 4) + String(pointer).substring(0, 2);
             if (!acabaEn8) {
@@ -61,7 +61,7 @@ function CalculaPointer(offset) {
         if (OffsetEsValido(offset)) {
             offset = ArreglaOffset(offset);
             //ZZYYXX offset y si empieza en 01 y tiene seis char mas pues se le resta 0x FF FF FF al offset y acaba en 09
-            esMayor = String(offset).substring(0, 2).equals("01");
+            esMayor = String(offset).substring(0, 2) == "01";
             // XX YY ZZ 08 o 09 Pointer
             ptr = String(offset).substring(MAXLENGTH - 2, MAXLENGTH) + String(offset).substring(MAXLENGTH - 4, MAXLENGTH - 2) + String(offset).substring(MAXLENGTH - 6, MAXLENGTH - 4);
             if (esMayor) {
