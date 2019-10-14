@@ -1,3 +1,3 @@
-# PokemonOroYPlataClave
+# PokemonOffsetToPointer
 
-https://tetradogpwa.github.io/PokemonOroYPlataClave/
+ https://tetradogpwa.github.io/PokemonOffsetToPointer/
