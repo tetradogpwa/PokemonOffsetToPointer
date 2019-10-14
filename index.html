@@ -61,14 +61,13 @@
         function CopiarToClipBoard(inPutId) {
             /* Get the text field */
             var copyText = document.getElementById(inPutId);
-            var clipboardData = e.clipboardData || window.clipboardData;
-            clipboardData.setData("text/plain", copyText.value);
+
+            window.clipboardData.setData("text/plain", copyText.value);
         }
 
         function PegarToClipBoard() {
             // Get pasted data via clipboard API
-            var clipboardData = e.clipboardData || window.clipboardData;
-            return clipboardData.getData('Text');
+            return window.clipboardData.getData('Text');
         }
 
 
