@@ -106,7 +106,7 @@ function PointerEsValido(ptr) {
 
         if (!esMasPequeño) {
             lastChar = String(ptr).substring(String(ptr).length - 1);
-            valido = lastChar.equals(End8) || lastChar.equals(End9);
+            valido = lastChar == End8 || lastChar == End9;
         }
     }
     return valido; //si mide la longitud maxima mirar si acaba en 8 o 9
@@ -115,7 +115,7 @@ function PointerEsValido(ptr) {
 function ArreglaPointer(pointer) {
     var poner08 = true;
     if (String(pointer).length > MAXLENGTH - 2) {
-        poner08 = String(pointer).substring(String(pointer).length - 1, String(pointer).length).equals("8");
+        poner08 = String(pointer).substring(String(pointer).length - 1, String(pointer).length) == "8";
         pointer = String(pointer).substring(0, MAXLENGTH - 2);
     } else {
         pointer = PadLeft(pointer, MAXLENGTH - 2, '0');
