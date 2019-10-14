@@ -18,11 +18,6 @@
 
         function inicializar() {
 
-            const copy = new ClipboardJS(".btnCopy");
-            const paste = new ClipboardJS(".btnPaste");
-
-
-
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/PokemonOffsetToPointer/sw.js');
             }
