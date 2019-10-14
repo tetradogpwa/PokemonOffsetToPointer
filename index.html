@@ -49,6 +49,11 @@
 
 
 
+        function Reset() {
+            document.getElementById("inpOffset").value = "";
+            document.getElementById("inpPointer").value = "";
+            GuardaCampos();
+        }
 
         function CargarCampos() {
             document.getElementById("inpOffset").value = localStorage.getItem("offset");
@@ -82,6 +87,8 @@
                 <td><input type="button" onclick="GenerarOffset()" value="Offset"></input>
                 </td>
                 <td><input type="button" onclick="GenerarPointer()" value="Pointer"></input>
+                </td>
+                <td><input type="button" onclick="Reset()" value="Reset"></input>
                 </td>
             </tr>
         </tbody>
