@@ -50,12 +50,12 @@
         }
 
         function PegarOffset() {
-            document.getElementById("inpOffset").value = PegarToClipBoard();
+            PegarToClipBoard("inpOffset");
             GenerarPointer();
         }
 
         function PegarPointer() {
-            document.getElementById("inpPointer").value = PegarToClipBoard();
+            PegarToClipBoard("inpPointer");
             GenerarOffset();
         }
 
@@ -72,10 +72,17 @@
 
         }
 
-        function PegarToClipBoard() {
+        function PegarToClipBoard(inPutId) {
             // Get pasted data via clipboard API
-            clipboardData = e.clipboardData || window.clipboardData;
-            return clipboardData.getData('Text');
+            var editor = document.getElementById(inPutId);
+
+            editor.focus();
+
+            editor.select();
+
+
+
+            document.execCommand('Paste');
         }
 
 
