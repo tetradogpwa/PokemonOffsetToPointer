@@ -41,6 +41,42 @@
             }
         }
 
+        function CopiarOffset() {
+            CopiarToClipBoard("inpOffset");
+        }
+
+        function CopiarPointer() {
+            CopiarToClipBoard("inpPointer");
+        }
+
+        function PegarOffset() {
+            document.getElementById("inpOffset").value = PegarToClipBoard();
+            GenerarPointer();
+        }
+
+        function PegarPointer() {
+            document.getElementById("inpPointer").value = PegarToClipBoard();
+            GenerarOffset();
+        }
+
+        function CopiarToClipBoard(inPutId) {
+            /* Get the text field */
+            var copyText = document.getElementById(inPutId);
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+        }
+
+        function PegarToClipBoard() {
+            // Get pasted data via clipboard API
+            clipboardData = e.clipboardData || window.clipboardData;
+            return clipboardData.getData('Text');
+        }
 
 
 
@@ -58,15 +94,25 @@
             <tr>
                 <td>Offset</td>
                 <td><input id="inpOffset" placeholder="Offset"></td>
+                <td><input type="button" onclick="PegarOffset()" value="Pegar"></input>
+                </td>
+                <td><input type="button" onclick="CopiarOffset()" value="Copiar"></input>
+                </td>
             </tr>
             <tr>
                 <td>Pointer</td>
                 <td><input id="inpPointer" placeholder="Pointer"></td>
+                <td><input type="button" onclick="PegarPointer()" value="Pegar"></input>
+                </td>
+                <td><input type="button" onclick="CopiarPointer()" value="Copiar"></input>
+                </td>
             </tr>
 
             <tr>
-                <td><button onclick="GenerarOffset()">Offset</button></td>
-                <td><button onclick="GenerarPointer()">Pointer</button></td>
+                <td><input type="button" onclick="GenerarOffset()" value="Offset"></input>
+                </td>
+                <td><input type="button" onclick="GenerarPointer()" value="Pointer"></input>
+                </td>
             </tr>
         </tbody>
     </table>
