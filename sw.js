@@ -1,6 +1,6 @@
-const CACHE_VERSION = 1.6;
-const CACHE_INMUTABLE = "CACHE_INMUTABLE";
-const CACHE_DINAMICO = "CACHE_DINAMICO";
+const CACHE_VERSION = 1.7;
+const CACHE_INMUTABLE = "CACHE_INMUTABLE_PokemonOffsetToPointer";
+const CACHE_DINAMICO = "CACHE_DINAMICO_PokemonOffsetToPointer";
 const INMUTABLES = [];
 
 
