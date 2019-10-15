@@ -96,7 +96,7 @@
         <tbody>
             <tr>
                 <td>Offset</td>
-                <td><input id="inpOffset" placeholder="Offset"></td>
+                <td><input id="inpOffset" placeholder="Offset" onkeyup="return GenerarPointer()"></td>
                 <td><input type="button" onclick="PegarOffset()" value="Pegar"></input>
                 </td>
                 <td><input type="button" onclick="CopiarOffset()" value="Copiar"></input>
@@ -104,7 +104,7 @@
             </tr>
             <tr>
                 <td>Pointer</td>
-                <td><input id="inpPointer" placeholder="Pointer"></td>
+                <td><input id="inpPointer" placeholder="Pointer" onkeyup="return GenerarOffset()"></td>
                 <td><input type="button" onclick="PegarPointer()" value="Pegar"></input>
                 </td>
                 <td><input type="button" onclick="CopiarPointer()" value="Copiar"></input>
@@ -112,10 +112,6 @@
             </tr>
 
             <tr>
-                <td><input type="button" onclick="GenerarOffset()" value="Offset"></input>
-                </td>
-                <td><input type="button" onclick="GenerarPointer()" value="Pointer"></input>
-                </td>
                 <td><input type="button" onclick="Reset()" value="Reset"></input>
                 </td>
             </tr>
