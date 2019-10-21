@@ -1,25 +1,42 @@
-const CACHE_VERSION = 1.7;
-const CACHE_INMUTABLE = "CACHE_INMUTABLE_PokemonOffsetToPointer";
-const CACHE_DINAMICO = "CACHE_DINAMICO_PokemonOffsetToPointer";
-const INMUTABLES = [];
+const CACHE_VERSION_ANTERIOR = 6; //subo aqui para no tener problemas :D
+const CACHE_VERSION = CACHE_VERSION_ANTERIOR + 1;
+const APP="PokemonOffsetToPointer";
+
+const CACHE_INMUTABLE = "CACHE_INMUTABLE_"+APP;
+const CACHE_DINAMICO = "CACHE_DINAMICO_"+APP;
+const CACHE_DINAMICO = "CACHE_DINAMICO_"+APP;
+const INMUTABLES = [
+
+];
+const SHELL = [
+
+    "index.html",
+    "style.css",
+    "images/icons/icon-144x144.png",
+    "images/icons/icon-512x512.png",
+    "sw.js",
+    "pokemonOffsetToPointer.js",
+    "manifest.json"
+
+];
 
 
 self.addEventListener('install', e => {
 
-    e.waitUntil(caches.open(CACHE_INMUTABLE)
-        .then(cache => {
-
-            return cache.addAll(INMUTABLES);
-
-        }));
+    var inmutables = self.FetchCache(CACHE_INMUTABLE + CACHE_VERSION, INMUTABLES);
+    var shell = self.FetchCache(CACHE_SHELL + CACHE_VERSION, SHELL);
+    console.log("installing version " + CACHE_VERSION);
+    e.waitUntil(Promise.all([inmutables, shell]));
 
 });
 
+
 self.addEventListener('activate', e => {
-
-    e.waitUntil(Promise.all([DeleteCache(CACHE_INMUTABLE), DeleteCache(CACHE_DINAMICO)]));
-
-
+    console.log("uninstalling version " + CACHE_VERSION_ANTERIOR);
+    e.waitUntil(Promise.all([caches.delete(CACHE_INMUTABLE + CACHE_VERSION_ANTERIOR),
+        caches.delete(CACHE_SHELL + CACHE_VERSION_ANTERIOR),
+        caches.delete(CACHE_DINAMICO)
+    ]));
 
 });
 
@@ -45,18 +62,13 @@ self.addEventListener('fetch', e => {
 
 });
 
-function DeleteCache(name) {
-    return new Promise((okey, error) => {
-        caches.open(name).then(cache => {
 
-            cache.keys().then(keys => keys.forEach(
-                key => {
-                    cache.delete(key);
 
-                }
-            ));
+function FetchCache(cache_name, urls) {
+    return caches.open(cache_name)
+        .then(cache => {
+
+            cache.addAll(urls);
+
         });
-        okey();
-    });
-
 }
