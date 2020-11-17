@@ -11,7 +11,6 @@ const INMUTABLES = [
 const SHELL = [
 
     "index.html",
-    "style.css",
     "images/icons/icon-144x144.png",
     "images/icons/icon-512x512.png",
     "sw.js",
