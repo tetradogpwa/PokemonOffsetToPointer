@@ -1,4 +1,4 @@
-const CACHE_VERSION = 8;
+const CACHE_VERSION = 9;
 const APP = "PokemonOffsetToPointer";
 const CACHE_PREFIX = "CACHE_" + APP + "_";
 
