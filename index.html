@@ -78,11 +78,17 @@
             }).catch(() => alert("Se ha bloqueado el botón Pegar. Desbloquéalo para poder usarlo."));
         }
 
-        function CopiarToClipBoard(inputId) {
-            var copyText = document.getElementById(inputId);
+        function CopiarToClipBoard(inPutId) {
+            /* Get the text field */
+            var copyText = document.getElementById(inPutId);
+
             navigator.clipboard.writeText(copyText.value);
         }
 
+        function PegarToClipBoard() {
+            // Get pasted data via clipboard API
+            return navigator.clipboard.readText();
+        }
         function Reset() {
             document.getElementById("inpOffset").value = "";
             document.getElementById("inpPointer").value = "";
