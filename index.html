@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="es">
 
 <head>
@@ -30,64 +30,20 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <p>Offset</p>
-            </div>
-            <div class="col-5">
-                <input id="inpOffset" placeholder="Offset">
-            </div>
-            <div class="col-2">
-                <input type="button" id="btnPasteOffset" value="Pegar">
-            </div>
-            <div class="col-2">
-                <input type="button" id="btnCopyOffset" value="Copiar">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <p>Pointer</p>
-            </div>
-            <div class="col-5">
-                <input id="inpPointer" placeholder="Pointer">
-            </div>
-            <div class="col-2">
-                <input type="button" id="btnPastePointer" value="Pegar">
-            </div>
-            <div class="col-2">
-                <input type="button" id="btnCopyPointer" value="Copiar">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <input type="button" id="btnReset" value="Reset">
-            </div>
-        </div>
-    </div>
-
-    <script>
-        window.onload = () => {
-            inicializar();
-
-            document.getElementById("btnPasteOffset").onclick = PegarOffset;
-            document.getElementById("btnCopyOffset").onclick = CopiarOffset;
-            document.getElementById("btnPastePointer").onclick = PegarPointer;
-            document.getElementById("btnCopyPointer").onclick = CopiarPointer;
-            document.getElementById("btnReset").onclick = Reset;
-        };
+    <script language="javascript">
+        window.onload = () => inicializar();
 
         function inicializar() {
+
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/PokemonOffsetToPointer/sw.js');
             }
             CargarCampos();
         }
-
         function GenerarPointer() {
             var offset = document.getElementById("inpOffset").value;
             if (offset) {
-                document.getElementById("inpPointer").value = CalculaPointer(offset);
+                document.getElementById("inpPointer").value = toPointer(offset);
                 GuardaCampos();
             }
         }
@@ -95,7 +51,7 @@
         function GenerarOffset() {
             var pointer = document.getElementById("inpPointer").value;
             if (pointer) {
-                document.getElementById("inpOffset").value = CalculaOffset(pointer);
+                document.getElementById("inpOffset").value = toOffset(pointer);
                 GuardaCampos();
             }
         }
@@ -134,14 +90,55 @@
         }
 
         function CargarCampos() {
-            document.getElementById("inpOffset").value = localStorage.getItem("offset") || "";
-            GenerarPointer();
+            let offset = localStorage.getItem("offset") || "";
+            document.getElementById("inpOffset").value=offset;
+           GenerarPointer();
         }
 
         function GuardaCampos() {
             localStorage.setItem("offset", document.getElementById("inpOffset").value);
         }
     </script>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <p>Offset</p>
+            </div>
+            <div class="col-5">
+                <input id="inpOffset" placeholder="Offset" onkeyup="return GenerarPointer()">
+            </div>
+            <div class="col-2">
+                <input type="button" onclick="PegarOffset()" value="Pegar"></input>
+
+            </div>
+            <div class="col-2">
+                <input type="button" onclick="CopiarOffset()" value="Copiar"></input>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-3">
+
+                <p>Pointer</p>
+            </div>
+            <div class="col-5">
+                <input id="inpPointer" placeholder="Pointer" onkeyup="return GenerarOffset()">
+            </div>
+            <div class="col-2">
+                <input type="button" onclick="PegarPointer()" value="Pegar"></input>
+            </div>
+            <div class="col-2">
+                <input type="button" onclick="CopiarPointer()" value="Copiar"></input>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <input type="button" onclick="Reset()" value="Reset"></input>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
